@@ -1,4 +1,5 @@
 import { Button } from '@/components/ui/button'
+import { LinkButton } from '@/components/ui/link-button'
 
 const nftImages = ['/nft_01.jpg', '/nft_02.jpg', '/nft_03.jpg', '/nft_04.jpg', '/nft_05.jpg']
 
@@ -27,10 +28,16 @@ export default function HeroSection() {
           </div>
 
           <div className='mt-8 flex flex-col justify-center gap-4 sm:flex-row'>
-            <Button className='bg-primary text-primary-foreground hover:bg-primary/90'>View the Collection</Button>
-            <Button variant='secondary' className='bg-secondary text-secondary-foreground hover:bg-secondary/80'>
+            <LinkButton href='/nfts' className='bg-primary text-primary-foreground hover:bg-primary/90'>
+              View the Collection
+            </LinkButton>
+            <LinkButton
+              href='/our-story'
+              variant='secondary'
+              className='bg-secondary text-secondary-foreground hover:bg-secondary/80'
+            >
               Learn Our Story
-            </Button>
+            </LinkButton>
           </div>
         </div>
       </div>
