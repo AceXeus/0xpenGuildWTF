@@ -10,7 +10,7 @@ import { NFTListItem } from '@/components/nft-list-item'
 const DEMO_NFTS = [
   {
     id: 1,
-    title: 'The Holy Grail',
+    title: 'Penlou1s',
     creator: 'Pixart Motion',
     image: '/nft_01.jpg',
     price: '0.001',
@@ -18,7 +18,7 @@ const DEMO_NFTS = [
   },
   {
     id: 2,
-    title: 'Mirror Glass Effect',
+    title: 'Saitapen',
     creator: 'Pixart Motion',
     image: '/nft_02.jpg',
     price: '0.005',
@@ -26,7 +26,7 @@ const DEMO_NFTS = [
   },
   {
     id: 3,
-    title: 'Neon in Life',
+    title: 'Poanlen',
     creator: 'Pixart Motion',
     image: '/nft_03.jpg',
     price: '0.002',
@@ -34,7 +34,7 @@ const DEMO_NFTS = [
   },
   {
     id: 4,
-    title: 'Oil Source',
+    title: 'Penpiii',
     creator: 'Pixart Motion',
     image: '/nft_04.jpg',
     price: '0.001',
@@ -42,7 +42,7 @@ const DEMO_NFTS = [
   },
   {
     id: 5,
-    title: 'Oil Source',
+    title: 'Payken',
     creator: 'Pixart Motion',
     image: '/nft_05.jpg',
     price: '0.001',
