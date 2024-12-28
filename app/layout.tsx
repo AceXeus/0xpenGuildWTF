@@ -52,10 +52,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang='en' suppressHydrationWarning>
-      <body className={`${myFont.className} ${myFont.variable} antialiased`}>
+      <body className={`${myFont.className} ${myFont.variable} custom-selection antialiased`}>
         <Providers>
           <Header />
-          <main className='gap-2py-14 flex flex-col'>{children}</main>
+          <main className='flex flex-col gap-2 py-14'>{children}</main>
         </Providers>
       </body>
     </html>
