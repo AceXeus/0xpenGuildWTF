@@ -4,6 +4,7 @@ import localFont from 'next/font/local'
 import Providers from '@/providers'
 import '@rainbow-me/rainbowkit/styles.css'
 import './globals.css'
+import TopLoader from '@/components/top-loader.tsx'
 
 const myFont = localFont({
   src: [
@@ -54,6 +55,7 @@ export default function RootLayout({
     <html lang='en' suppressHydrationWarning>
       <body className={`${myFont.className} ${myFont.variable} custom-selection antialiased`}>
         <Providers>
+          <TopLoader />
           <Header />
           <main className='flex flex-col gap-2 py-14'>{children}</main>
         </Providers>
