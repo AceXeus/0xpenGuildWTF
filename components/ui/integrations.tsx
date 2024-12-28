@@ -129,6 +129,11 @@ export function Integrations() {
               <Card key={idx} {...review} />
             ))}
           </Marquee>
+          <Marquee reverse className='hidden [--duration:30s] dark:flex' repeat={5}>
+            {randomTiles4.map((review, idx) => (
+              <Card key={idx} {...review} />
+            ))}
+          </Marquee>
           <div className='absolute'>
             <div className='bg-backtround absolute inset-0 -z-10 rounded-full opacity-40 blur-xl dark:bg-background' />
           </div>
