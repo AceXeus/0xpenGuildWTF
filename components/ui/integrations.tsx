@@ -16,7 +16,7 @@ const tiles = [
   {
     icon: <Globe className='size-full' />,
     bg: (
-      <div className='pointer-events-none absolute left-1/2 top-1/2 size-1/2 -translate-x-1/2 -translate-y-1/2 overflow-visible rounded-full bg-gradient-to-r from-cyan-500 via-blue-500 to-indigo-500 opacity-70 blur-[20px]'></div>
+      <div className='pointer-events-none absolute left-1/2 top-1/2 size-1/2 -translate-x-1/2 -translate-y-1/2 overflow-visible rounded-full bg-gradient-to-r from-cyan-500 via-highlight to-indigo-500 opacity-70 blur-[20px]'></div>
     )
   },
   {
