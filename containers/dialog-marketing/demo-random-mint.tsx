@@ -39,7 +39,7 @@ const DemoRandomMint = () => {
           <ScratchToMint
             width={250}
             height={250}
-            minScratchPercentage={50}
+            minScratchPercentage={75}
             className='flex items-center justify-center overflow-hidden border bg-gradient-to-r'
             onComplete={handleComplete}
             overlayImage={'/0xpenguild_overlay.jpg'}
