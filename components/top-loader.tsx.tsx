@@ -3,7 +3,7 @@ import NextTopLoader from 'nextjs-toploader'
 export default function TopLoader() {
   return (
     <NextTopLoader
-      color={'#ff8800'}
+      color={'#7856ff'}
       initialPosition={0.08}
       crawlSpeed={1000}
       height={3}
