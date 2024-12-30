@@ -1,5 +1,5 @@
-import { Button } from '@/components/ui/button'
 import { LinkButton } from '@/components/ui/link-button'
+import MorphingText from '@/components/ui/morphingtext'
 
 const nftImages = ['/nft_01.jpg', '/nft_02.jpg', '/nft_03.jpg', '/nft_04.jpg', '/nft_05.jpg']
 
@@ -31,11 +31,7 @@ export default function HeroSection() {
             <LinkButton href='/nfts' className='bg-primary text-primary-foreground hover:bg-primary/90'>
               View the Collection
             </LinkButton>
-            <LinkButton
-              href='/our-story'
-              variant='secondary'
-              className='bg-secondary text-secondary-foreground hover:bg-secondary/80'
-            >
+            <LinkButton href='/our-story' variant={'outline'} className=''>
               Learn Our Story
             </LinkButton>
           </div>
