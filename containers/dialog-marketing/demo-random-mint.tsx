@@ -2,7 +2,6 @@
 
 import React, { useEffect, useState } from 'react'
 import ScratchToMint from '@/components/scratch-to-mint'
-import { Button } from '@/components/ui/button'
 import {
   Dialog,
   DialogContent,
@@ -39,7 +38,7 @@ const DemoRandomMint = () => {
           <ScratchToMint
             width={250}
             height={250}
-            minScratchPercentage={75}
+            minScratchPercentage={55}
             className='flex items-center justify-center overflow-hidden border bg-gradient-to-r'
             onComplete={handleComplete}
             overlayImage={'/0xpenguild_overlay.jpg'}
