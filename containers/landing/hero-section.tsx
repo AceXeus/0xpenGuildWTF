@@ -1,5 +1,4 @@
 import { LinkButton } from '@/components/ui/link-button'
-import MorphingText from '@/components/ui/morphingtext'
 
 const nftImages = ['/nft_01.jpg', '/nft_02.jpg', '/nft_03.jpg', '/nft_04.jpg', '/nft_05.jpg']
 
