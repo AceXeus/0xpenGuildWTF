@@ -1,4 +1,4 @@
-import { Button } from '@/components/ui/button'
+import { HyperText } from '@/components/ui/hyper-text'
 import { LinkButton } from '@/components/ui/link-button'
 
 const nftImages = ['/nft_01.jpg', '/nft_02.jpg', '/nft_03.jpg', '/nft_04.jpg', '/nft_05.jpg']
@@ -9,7 +9,7 @@ export default function HeroSection() {
       <div className='container px-4 md:px-6'>
         <div className='flex flex-col items-center space-y-8 text-center'>
           <h1 className='text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl lg:text-6xl'>
-            The <span className='text-primary'>PenGuilds</span> are here.
+            The <span className='inline-block text-primary'>PenGuilds</span> are here.
           </h1>
 
           <p className='mx-auto max-w-[700px] text-muted-foreground md:text-xl'>
@@ -31,11 +31,7 @@ export default function HeroSection() {
             <LinkButton href='/nfts' className='bg-primary text-primary-foreground hover:bg-primary/90'>
               View the Collection
             </LinkButton>
-            <LinkButton
-              href='/our-story'
-              variant='secondary'
-              className='bg-secondary text-secondary-foreground hover:bg-secondary/80'
-            >
+            <LinkButton href='/our-story' variant={'outline'} className=''>
               Learn Our Story
             </LinkButton>
           </div>
