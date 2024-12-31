@@ -12,6 +12,8 @@ interface ScratchToMintProps {
   className?: string
   onComplete?: () => void
   overlayImage: string
+  disabled?: boolean
+  onClick?: () => void
 }
 
 const ScratchToMint: React.FC<ScratchToMintProps> = ({
@@ -21,7 +23,9 @@ const ScratchToMint: React.FC<ScratchToMintProps> = ({
   onComplete,
   children,
   className,
-  overlayImage
+  overlayImage,
+  disabled = false,
+  onClick
 }) => {
   const canvasRef = useRef<HTMLCanvasElement>(null)
   const [isScratching, setIsScratching] = useState(false)
@@ -75,18 +79,14 @@ const ScratchToMint: React.FC<ScratchToMintProps> = ({
       checkCompletion()
     }
 
-    document.addEventListener('mousedown', handleDocumentMouseMove)
     document.addEventListener('mousemove', handleDocumentMouseMove)
-    document.addEventListener('touchstart', handleDocumentTouchMove)
     document.addEventListener('touchmove', handleDocumentTouchMove)
     document.addEventListener('mouseup', handleDocumentMouseUp)
     document.addEventListener('touchend', handleDocumentTouchEnd)
     document.addEventListener('touchcancel', handleDocumentTouchEnd)
 
     return () => {
-      document.removeEventListener('mousedown', handleDocumentMouseMove)
       document.removeEventListener('mousemove', handleDocumentMouseMove)
-      document.removeEventListener('touchstart', handleDocumentTouchMove)
       document.removeEventListener('touchmove', handleDocumentTouchMove)
       document.removeEventListener('mouseup', handleDocumentMouseUp)
       document.removeEventListener('touchend', handleDocumentTouchEnd)
@@ -94,17 +94,25 @@ const ScratchToMint: React.FC<ScratchToMintProps> = ({
     }
   }, [isScratching])
 
-  const handleMouseDown = () => setIsScratching(true)
+  const handleMouseDown = (event: React.MouseEvent) => {
+    if (disabled) return
+    setIsScratching(true)
+    onClick && onClick()
+  }
 
-  const handleTouchStart = () => setIsScratching(true)
+  const handleTouchStart = (event: React.TouchEvent) => {
+    if (disabled) return
+    setIsScratching(true)
+    onClick && onClick()
+  }
 
   const scratch = (clientX: number, clientY: number) => {
     const canvas = canvasRef.current
     const ctx = canvas?.getContext('2d')
     if (canvas && ctx) {
       const rect = canvas.getBoundingClientRect()
-      const x = clientX - rect.left + 16
-      const y = clientY - rect.top + 16
+      const x = clientX - rect.left
+      const y = clientY - rect.top
       ctx.globalCompositeOperation = 'destination-out'
       ctx.beginPath()
       ctx.arc(x, y, 30, 0, Math.PI * 2)
@@ -154,19 +162,15 @@ const ScratchToMint: React.FC<ScratchToMintProps> = ({
       style={{
         width,
         height,
-        cursor:
-          "url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzMiIgaGVpZ2h0PSIzMiIgdmlld0JveD0iMCAwIDMyIDMyIj4KICA8Y2lyY2xlIGN4PSIxNiIgY3k9IjE2IiByPSIxNSIgc3R5bGU9ImZpbGw6I2ZmZjtzdHJva2U6IzAwMDtzdHJva2Utd2lkdGg6MXB4OyIgLz4KPC9zdmc+'), auto"
+        cursor: disabled
+          ? 'not-allowed'
+          : "url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzMiIgaGVpZ2h0PSIzMiIgdmlld0JveD0iMCAwIDMyIDMyIj4KICA8Y2lyY2xlIGN4PSIxNiIgY3k9IjE2IiByPSIxNSIgc3R5bGU9ImZpbGw6I2ZmZjtzdHJva2U6IzAwMDtzdHJva2Utd2lkdGg6MXB4OyIgLz4KPC9zdmc+'), auto"
       }}
       animate={controls}
+      onMouseDown={handleMouseDown}
+      onTouchStart={handleTouchStart}
     >
-      <canvas
-        ref={canvasRef}
-        width={width}
-        height={height}
-        className='absolute left-0 top-0'
-        onMouseDown={handleMouseDown}
-        onTouchStart={handleTouchStart}
-      ></canvas>
+      <canvas ref={canvasRef} width={width} height={height} className='absolute left-0 top-0'></canvas>
       {children}
     </motion.div>
   )
