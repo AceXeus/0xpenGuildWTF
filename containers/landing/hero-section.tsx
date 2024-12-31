@@ -1,5 +1,7 @@
 import { HyperText } from '@/components/ui/hyper-text'
+import { InteractiveHoverButton } from '@/components/ui/interactivebutton'
 import { LinkButton } from '@/components/ui/link-button'
+import Link from 'next/link'
 
 const nftImages = ['/nft_01.jpg', '/nft_02.jpg', '/nft_03.jpg', '/nft_04.jpg', '/nft_05.jpg']
 
@@ -35,6 +37,9 @@ export default function HeroSection() {
               Learn Our Story
             </LinkButton>
           </div>
+          <Link href={'/mint'}>
+            <InteractiveHoverButton text='Mint Your NFT' />
+          </Link>
         </div>
       </div>
     </section>

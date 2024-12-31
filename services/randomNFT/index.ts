@@ -10,14 +10,12 @@ export async function generateSingleNFT() {
   const selection = randomlySelectLayers(layersPath, layers);
   const imageBase64 = await mergeImages(selection.images, { Canvas, Image });
 
-  const metadata = generateMetadata(layers, 0, selection.selectedTraits);
+  const metadata = generateMetadata(selection.selectedTraits);
 
   return { image: imageBase64, metadata };
 }
 
 function generateMetadata(
-  layers: any[],
-  tokenId: number,
   traits: Record<string, string>
 ) {
   const attributes = Object.entries(traits).map(([trait_type, value]) => ({
@@ -25,7 +23,6 @@ function generateMetadata(
     value,
   }));
   return {
-    tokenId,
     attributes,
   };
 }
