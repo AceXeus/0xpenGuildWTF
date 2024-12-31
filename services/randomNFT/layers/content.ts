@@ -24,26 +24,26 @@ export const layers = [
         name: "Shirt",
         probability: 1.0,
         options: [
-            { name: "Flames", file: "shirt/flames.png", weight: 0.4 },
+            { name: "Flames", file: "shirt/flames.png", weight: 0.1 },
             { name: "Pinata", file: "shirt/pinata.png", weight: 0.2 },
             { name: "Purple Blue Pink", file: "shirt/purple-blue-pink.png", weight: 0.3 },
-            { name: "Stripes Blue White", file: "shirt/stripes-blue-white.png", weight: 0.1 }
+            { name: "Stripes Blue White", file: "shirt/stripes-blue-white.png", weight: 0.4 }
         ]
     },
     {
         name: "Top",
-        probability: 1.0,
+        probability: 0.4,
         options: [
-            { name: "Cap", file: "top/cap.png", weight: 0.25 },
+            { name: "Cap", file: "top/cap.png", weight: 0.35 },
             { name: "Cowboy", file: "top/cowboy.png", weight: 0.25 },
-            { name: "Einstein", file: "top/einstein.png", weight: 0.2 },
+            { name: "Einstein", file: "top/einstein.png", weight: 0.1 },
             { name: "Fez", file: "top/fez.png", weight: 0.2 },
             { name: "Like A Sir", file: "top/like-a-sir.png", weight: 0.1 }
         ]
     },
     {
         name: "Facial Hair",
-        probability: 1.0,
+        probability: 0.5,
         options: [
             { name: "Goatee", file: "facial-hair/goatee.png", weight: 0.6 },
             { name: "Long Beard", file: "facial-hair/long-beard.png", weight: 0.3 }, 
@@ -52,7 +52,7 @@ export const layers = [
     },
     {
         name: "Eyes",
-        probability: 1.0,
+        probability: 0.2,
         options: [
             { name: "3D", file: "eyes/3d.png", weight: 0.4 }, 
             { name: "Laser", file: "eyes/laser.png", weight: 0.3 }, 
