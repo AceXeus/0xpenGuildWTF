@@ -24,9 +24,10 @@ export default function OurStory() {
                 <HyperText startOnView>Our Story</HyperText>
               </h2>
               <p className='max-w-[600px] md:text-xl'>
-                We started our journey in the world of NFTs with a simple vision: to revolutionize digital ownership and
-                empower artists. Our passion for blockchain technology and digital art drove us to create a platform
-                where creativity knows no bounds.
+                We kicked off our wild ride into the NFT universe with one big, bold dream: shaking up the game of
+                digital ownership and giving artists the ultimate power-up. Fueled by our obsession with blockchain
+                wizardry and next-level digital art, we built a platform where creativity isn’t just unleashed—it’s
+                unleashed on steroids. 🚀🎨
               </p>
             </div>
             <div className='flex flex-col gap-2 min-[400px]:flex-row'>
@@ -35,10 +36,10 @@ export default function OurStory() {
                 variant='secondary'
                 className='bg-secondary text-secondary-foreground hover:bg-secondary/80'
               >
-                <HyperText>Learn More</HyperText>
+                Learn More
               </LinkButton>
               <LinkButton variant={'outline'} href='/nfts' className='bg-primary text-primary-foreground'>
-                <HyperText>Our Collection</HyperText>
+                Our Collection
               </LinkButton>
             </div>
           </div>

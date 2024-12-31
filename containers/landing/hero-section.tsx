@@ -29,10 +29,10 @@ export default function HeroSection() {
 
           <div className='mt-8 flex flex-col justify-center gap-4 sm:flex-row'>
             <LinkButton href='/nfts' className='bg-primary text-primary-foreground hover:bg-primary/90'>
-              <HyperText>View the Collection</HyperText>
+              View the Collection
             </LinkButton>
             <LinkButton href='/our-story' variant={'outline'} className=''>
-              <HyperText>Learn Our Story</HyperText>
+              Learn Our Story
             </LinkButton>
           </div>
         </div>
