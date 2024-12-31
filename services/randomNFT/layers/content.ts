@@ -10,24 +10,6 @@ export const layers = [
         ]
     },
     {
-        name: "Eyes",
-        probability: 1.0,
-        options: [
-            { name: "3D", file: "eyes/3d.png", weight: 0.4 }, 
-            { name: "Laser", file: "eyes/laser.png", weight: 0.3 }, 
-            { name: "Square Shades", file: "eyes/square-shades.png", weight: 0.3 } 
-        ]
-    },
-    {
-        name: "Facial Hair",
-        probability: 1.0,
-        options: [
-            { name: "Goatee", file: "facial-hair/goatee.png", weight: 0.6 },
-            { name: "Long Beard", file: "facial-hair/long-beard.png", weight: 0.3 }, 
-            { name: "Mutton Chops", file: "facial-hair/mutton-chops.png", weight: 0.1 }
-        ]
-    },
-    {
         name: "Head",
         probability: 1.0,
         options: [
@@ -58,5 +40,23 @@ export const layers = [
             { name: "Fez", file: "top/fez.png", weight: 0.2 },
             { name: "Like A Sir", file: "top/like-a-sir.png", weight: 0.1 }
         ]
-    }
+    },
+    {
+        name: "Facial Hair",
+        probability: 1.0,
+        options: [
+            { name: "Goatee", file: "facial-hair/goatee.png", weight: 0.6 },
+            { name: "Long Beard", file: "facial-hair/long-beard.png", weight: 0.3 }, 
+            { name: "Mutton Chops", file: "facial-hair/mutton-chops.png", weight: 0.1 }
+        ]
+    },
+    {
+        name: "Eyes",
+        probability: 1.0,
+        options: [
+            { name: "3D", file: "eyes/3d.png", weight: 0.4 }, 
+            { name: "Laser", file: "eyes/laser.png", weight: 0.3 }, 
+            { name: "Square Shades", file: "eyes/square-shades.png", weight: 0.3 } 
+        ]
+    },
 ];
