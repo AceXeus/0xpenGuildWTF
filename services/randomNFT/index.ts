@@ -1,28 +1,33 @@
-import { NextApiRequest, NextApiResponse } from 'next';
 import mergeImages from 'merge-images';
-import { Canvas, Image } from 'node-canvas';
+import { Canvas, Image } from 'canvas';
 import path from 'path';
-import fs from 'fs';
 import { MersenneTwister19937, bool, real } from 'random-js';
+import { layers } from './layers/content';
 
-const layersPath = path.join(process.cwd(), 'layers');
+const layersPath = path.join(process.cwd(), 'services', 'randomNFT', 'layers');
 
-async function generateSingleNFT() {
-  const content = require(path.join(layersPath, 'content'));
-  const selection = randomlySelectLayers(layersPath, content.layers);
+export async function generateSingleNFT() {
+  const selection = randomlySelectLayers(layersPath, layers);
   const imageBase64 = await mergeImages(selection.images, { Canvas, Image });
 
-  const metadata = generateMetadata(content, 0, selection.selectedTraits);
+  const metadata = generateMetadata(layers, 0, selection.selectedTraits);
 
   return { image: imageBase64, metadata };
 }
 
-function generateMetadata(content: any, tokenId: number, traits: Record<string, string>) {
+function generateMetadata(
+  layers: any[],
+  tokenId: number,
+  traits: Record<string, string>
+) {
   const attributes = Object.entries(traits).map(([trait_type, value]) => ({
     trait_type,
     value,
   }));
-  return content.metadataTemplate(tokenId, attributes);
+  return {
+    tokenId,
+    attributes,
+  };
 }
 
 function randomlySelectLayers(layersPath: string, layers: any[]) {
@@ -45,7 +50,10 @@ function randomlySelectLayers(layersPath: string, layers: any[]) {
   };
 }
 
-function pickWeighted(mt: MersenneTwister19937, options: { name: string; file: string; weight?: number }[]) {
+function pickWeighted(
+  mt: MersenneTwister19937,
+  options: { name: string; file: string; weight?: number }[]
+) {
   const weightSum = options.reduce((acc, option) => acc + (option.weight ?? 1.0), 0);
 
   const r = real(0.0, weightSum, false)(mt);
@@ -59,17 +67,4 @@ function pickWeighted(mt: MersenneTwister19937, options: { name: string; file: s
   }
 
   throw new Error('No option selected');
-}
-
-export default async function handler(req: NextApiRequest, res: NextApiResponse) {
-    try {
-        const { image, metadata } = await generateSingleNFT();
-        res.status(200).json({ image, metadata });
-    } catch (error) {
-        if (error instanceof Error) {
-            res.status(500).json({ error: error.message });
-        } else {
-            res.status(500).json({ error: "An unknown error occurred" });
-        }
-    }
 }
