@@ -18,15 +18,23 @@ const DemoRandomMint = () => {
   const [isMinted, setIsMinted] = useState(false)
 
   useEffect(() => {
-    setIsOpen(true)
+    const storedState = sessionStorage.getItem('scratchMintDialogDismissed')
+    setIsOpen(storedState !== 'true')
   }, [])
+
+  const handleDialogChange = (open: boolean) => {
+    setIsOpen(open)
+    if (!open) {
+      sessionStorage.setItem('scratchMintDialogDismissed', 'true')
+    }
+  }
 
   const handleComplete = () => {
     setIsMinted(true)
   }
 
   return (
-    <Dialog open={isOpen} onOpenChange={setIsOpen}>
+    <Dialog open={isOpen} onOpenChange={handleDialogChange}>
       <DialogContent>
         <DialogHeader>
           <DialogTitle className='text-center text-2xl font-bold'>Next Update : Scratch & Mint NFT</DialogTitle>
