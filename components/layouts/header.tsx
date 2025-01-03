@@ -5,12 +5,12 @@ import StartHighlight from '@/components/start-highlight'
 import { ThemeToggle } from '@/components/theme-toggle'
 import { Separator } from '@/components/ui/separator'
 import { IconArrowRight, IconBrandDiscordFilled, IconBrandTelegram, IconBrandX, IconMenu2 } from '@tabler/icons-react'
-import Image from 'next/image'
 import Link from 'next/link'
 import { useState } from 'react'
 
 const MENU_ITEMS = [
   { label: 'Culture', href: '/culture' },
+  { label: 'Ranking', href: '/ranking' },
   { label: 'Roadmap', href: '/roadmap' }
 ]
 
