@@ -12,7 +12,7 @@ const DEMO_NFTS = [
     id: 1,
     title: 'Penlou1s',
     creator: 'Pixart Motion',
-    image: '/nft_01.jpg',
+    image: '/nft_01.png',
     price: '0.001',
     type: 'fixed' as const
   },
@@ -20,7 +20,7 @@ const DEMO_NFTS = [
     id: 2,
     title: 'Saitapen',
     creator: 'Pixart Motion',
-    image: '/nft_02.jpg',
+    image: '/nft_02.png',
     price: '0.005',
     type: 'open' as const
   },
@@ -28,7 +28,7 @@ const DEMO_NFTS = [
     id: 3,
     title: 'Poanlen',
     creator: 'Pixart Motion',
-    image: '/nft_03.jpg',
+    image: '/nft_03.png',
     price: '0.002',
     type: 'fixed' as const
   },
@@ -36,7 +36,7 @@ const DEMO_NFTS = [
     id: 4,
     title: 'Penpiii',
     creator: 'Pixart Motion',
-    image: '/nft_04.jpg',
+    image: '/nft_04.png',
     price: '0.001',
     type: 'fixed' as const
   },
@@ -44,7 +44,7 @@ const DEMO_NFTS = [
     id: 5,
     title: 'Payken',
     creator: 'Pixart Motion',
-    image: '/nft_05.jpg',
+    image: '/nft_05.png',
     price: '0.001',
     type: 'fixed' as const
   }

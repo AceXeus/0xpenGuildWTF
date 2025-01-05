@@ -22,6 +22,7 @@ export default function TestNFT() {
     setError(null)
     try {
       const response = await fetch('/api/v1/random-nft')
+      console.log(response)
       if (!response.ok) {
         throw new Error('Failed to generate NFT')
       }
