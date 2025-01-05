@@ -3,7 +3,7 @@ import { InteractiveHoverButton } from '@/components/ui/interactivebutton'
 import { LinkButton } from '@/components/ui/link-button'
 import Link from 'next/link'
 
-const nftImages = ['/nft_01.jpg', '/nft_02.jpg', '/nft_03.jpg', '/nft_04.jpg', '/nft_05.jpg']
+const nftImages = ['/nft_01.png', '/nft_02.png', '/nft_03.png', '/nft_04.png', '/nft_05.png']
 
 export default function HeroSection() {
   return (
