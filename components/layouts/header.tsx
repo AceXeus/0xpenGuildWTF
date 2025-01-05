@@ -123,18 +123,18 @@ export const Logo = () => {
 const Socials = () => {
   return (
     <div className='flex items-center justify-center gap-10 lg:gap-4'>
-      <Link href='/' aria-label='Join our Discord community'>
+      <Link href='https://discord.gg/CJcXfAPdpU' target='_blank' aria-label='Join our Discord community'>
         <IconBrandDiscordFilled className='size-6 lg:size-4' />
       </Link>
       <Link
-        // target="_blank"
-        href='#'
+        target='_blank'
+        href='https://x.com/0x_penGuildWTF'
         aria-label='Visit our X (formerly Twitter) profile'
         rel='noopener noreferrer'
       >
         <IconBrandX className='size-6 lg:size-4' />
       </Link>
-      <Link href='/' aria-label='Join us on Telegram'>
+      <Link href='https://t.me/xpenGuildWTF' target='_blank' aria-label='Join us on Telegram'>
         <IconBrandTelegram className='size-6 lg:size-4' />
       </Link>
     </div>
