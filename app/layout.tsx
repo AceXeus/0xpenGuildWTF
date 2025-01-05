@@ -1,3 +1,4 @@
+import { GoogleAnalytics } from '@next/third-parties/google'
 import type { Metadata } from 'next'
 import Header from '@/components/layouts/header'
 import localFont from 'next/font/local'
@@ -62,6 +63,7 @@ export default function RootLayout({
           <main className='flex flex-col gap-2 py-14'>{children}</main>
         </Providers>
       </body>
+      <GoogleAnalytics gaId='G-QNXHRV4MHW' />
     </html>
   )
 }
