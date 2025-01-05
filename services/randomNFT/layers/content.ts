@@ -41,8 +41,9 @@ export const layers = [
         probability: 0.4,
         options: [
             { name: "Ballon", file: "top/ballon.png", weight: 0.3 },
-            { name: "ETH Flag", file: "top/flag.png", weight: 0.2 },
-            { name: "Glass", file: "top/glass.png", weight: 0.5 },
+            { name: "ETH Flag", file: "top/flag.png", weight: 0.1 },
+            { name: "Glass", file: "top/glass.png", weight: 0.3 },
+            { name: "Hat", file: "top/hat.png", weight: 0.3 },
         ]
     },
 ];
