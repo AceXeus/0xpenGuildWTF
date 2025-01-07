@@ -102,7 +102,7 @@ describe("NFT Marketplace System", function () {
       const { marketplace, collection1, penGuildPool, user1, collectionId } = await loadFixture(deployFixture);
       
       const mintPrice = ethers.parseEther("0.1");
-      const platformFee = mintPrice * 10n / 100n;
+      const platformFee = (mintPrice * BigInt(10)) / BigInt(100);
       
       const poolBalanceBefore = await ethers.provider.getBalance(await penGuildPool.getAddress());
       
