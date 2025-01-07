@@ -45,11 +45,13 @@
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",
+    "@openzeppelin/contracts": "^5.1.0",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "eslint": "^9",
     "eslint-config-next": "15.1.0",
+    "hardhat": "^2.22.17",
     "postcss": "^8",
     "prettier": "^3.3.3",
     "prettier-plugin-tailwindcss": "^0.6.8",
