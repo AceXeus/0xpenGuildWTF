@@ -4,10 +4,23 @@
 import { buildModule } from "@nomicfoundation/hardhat-ignition/modules";
 
 const NFTMarketplaceModule = buildModule("NFTMarketplaceModule", (m) => {
-  // Deploy NFTMarketplace contract
-  const nftMarketplace = m.contract("NFTMarketplace", []);
+  // Deploy PenGuildPool before
+  const penGuildPool = m.contract("PenGuildPool", []);
 
-  return { nftMarketplace };
+  // Deploy XPSystem
+  const xpSystem = m.contract("XPSystem", []);
+
+  // Deploy NFTMarketplace with PenGuildPool and XPSystem address
+  const nftMarketplace = m.contract("NFTMarketplace", [
+    penGuildPool,
+    xpSystem
+  ]);
+
+  return { 
+    penGuildPool,
+    xpSystem,
+    nftMarketplace
+  };
 });
 
 export default NFTMarketplaceModule;

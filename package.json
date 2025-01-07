@@ -6,7 +6,11 @@
     "dev": "next dev --turbopack",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "deploy": "cd contracts && npx hardhat ignition deploy ./ignition/modules/NFTMarketplace.ts --network moonbaseAlpha",
+    "test": "cd contracts && npx hardhat test",
+    "compile": "cd contracts && npx hardhat compile",
+    "clean": "cd contracts && npx hardhat clean"
   },
   "dependencies": {
     "@next/third-parties": "^15.1.3",
