@@ -8,6 +8,7 @@ const config: HardhatUserConfig = {
   solidity: "0.8.20",
   networks: {
     moonbaseAlpha: {
+      chainId: 1287,
       url: `${process.env.RPC_NETWORK}`,
       accounts: [process.env.PRIVATE_KEY || ""],
     },

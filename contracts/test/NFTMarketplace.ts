@@ -1,111 +1,228 @@
 import { loadFixture } from "@nomicfoundation/hardhat-toolbox/network-helpers";
 import { expect } from "chai";
-import hre from "hardhat";
+import { ethers } from "hardhat";
+import { EventLog } from "ethers";
 
-describe("NFTMarketplace", function () {
-  async function deployNFTMarketplaceFixture() {
-    const [owner, otherAccount] = await hre.ethers.getSigners();
-    const NFTMarketplace = await hre.ethers.getContractFactory("NFTMarketplace");
-    const marketplace = await NFTMarketplace.deploy();
+describe("NFT Marketplace System", function () {
+  async function deployFixture() {
+    const [owner, creator1, creator2, user1, user2] = await ethers.getSigners();
 
-    return { marketplace, owner, otherAccount };
+    // Deploy PenGuildPool
+    const PenGuildPool = await ethers.getContractFactory("PenGuildPool");
+    const penGuildPool = await PenGuildPool.deploy();
+
+    // Deploy XPSystem
+    const XPSystem = await ethers.getContractFactory("XPSystem");
+    const xpSystem = await XPSystem.deploy();
+
+    // Deploy NFTMarketplace
+    const NFTMarketplace = await ethers.getContractFactory("NFTMarketplace");
+    const marketplace = await NFTMarketplace.deploy(
+      await penGuildPool.getAddress(),
+      await xpSystem.getAddress()
+    );
+
+    // Deploy CreatorCollection
+    const CreatorCollection = await ethers.getContractFactory("CreatorCollection");
+    const collection1 = await CreatorCollection.connect(creator1).deploy(
+      "Collection 1",
+      "Test Collection 1",
+      ethers.parseEther("0.1"),
+      100,
+      await marketplace.getAddress()
+    );
+
+    // Register collection
+    const tx = await marketplace.connect(creator1).registerCollection(await collection1.getAddress());
+    const receipt = await tx.wait();
+    if (!receipt) throw new Error("Transaction failed");
+    const event = receipt.logs.find(
+      (log: any) => log.fragment.name === 'CollectionRegistered'
+    );
+    if (!event) throw new Error("CollectionRegistered event not found");
+    const collectionId = (event as EventLog).args[0];
+
+    // Create collection trong CreatorCollection contract
+    await collection1.connect(creator1).createCollection(
+      "Collection 1",
+      "Test Collection 1",
+      ethers.parseEther("0.1"),
+      100
+    );
+
+    return { 
+      marketplace, 
+      penGuildPool, 
+      xpSystem, 
+      collection1,
+      collectionId,
+      owner, 
+      creator1, 
+      creator2, 
+      user1, 
+      user2 
+    };
   }
 
-  describe("Deployment", function () {
-    it("Should initialize with correct owner", async function () {
-      const { marketplace, owner } = await loadFixture(deployNFTMarketplaceFixture);
-      await expect(marketplace.updateListPrice(hre.ethers.parseEther("0.02")))
-        .not.to.be.revertedWith("Only owner can update listing price");
+  describe("Collection Management", function() {
+    it("Should allow creator to create and register collection", async function() {
+      const { marketplace, collection1 } = await loadFixture(deployFixture);
+      
+      // Collection be register in fixture
+      const collectionAddress = await marketplace.collections(1);
+      expect(collectionAddress).to.equal(await collection1.getAddress());
     });
 
-    it("Should set the correct list price", async function () {
-      const { marketplace } = await loadFixture(deployNFTMarketplaceFixture);
-      expect(await marketplace.getListPrice()).to.equal(hre.ethers.parseEther("0.01"));
+    it("Should allow creator to update mint price", async function() {
+      const { collection1, creator1 } = await loadFixture(deployFixture);
+      const newPrice = ethers.parseEther("0.2");
+      
+      await collection1.connect(creator1).updateMintPrice(newPrice);
+      const collectionInfo = await collection1.collectionInfo();
+      expect(collectionInfo.mintPrice).to.equal(newPrice);
+    });
+
+    it("Should allow creator to toggle collection active status", async function() {
+      const { collection1, creator1 } = await loadFixture(deployFixture);
+      
+      // Toggle off
+      await collection1.connect(creator1).toggleActive();
+      const infoAfterToggle = await collection1.collectionInfo();
+      expect(infoAfterToggle.isActive).to.be.false;
+
+      // Toggle on again
+      await collection1.connect(creator1).toggleActive();
+      const finalInfo = await collection1.collectionInfo();
+      expect(finalInfo.isActive).to.be.true;
     });
   });
 
-  describe("NFT Operations", function () {
-    describe("Listing", function () {
-      it("Should create and list a new NFT", async function () {
-        const { marketplace } = await loadFixture(deployNFTMarketplaceFixture);
-        const tokenURI = "ipfs://test-uri";
-        const price = hre.ethers.parseEther("0.1");
-        const listPrice = await marketplace.getListPrice();
-
-        await expect(marketplace.createToken(tokenURI, price, { value: listPrice }))
-          .to.emit(marketplace, "TokenListedSuccess");
-      });
-
-      it("Should fail if listing price is not paid", async function () {
-        const { marketplace } = await loadFixture(deployNFTMarketplaceFixture);
-        const tokenURI = "ipfs://test-uri";
-        const price = hre.ethers.parseEther("0.1");
-
-        await expect(
-          marketplace.createToken(tokenURI, price, { value: 0 })
-        ).to.be.revertedWith("Hopefully sending the correct price");
-      });
+  describe("NFT Minting", function() {
+    it("Should mint NFT with correct platform fee distribution", async function() {
+      const { marketplace, collection1, penGuildPool, user1, collectionId } = await loadFixture(deployFixture);
+      
+      const mintPrice = ethers.parseEther("0.1");
+      const platformFee = mintPrice * 10n / 100n;
+      
+      const poolBalanceBefore = await ethers.provider.getBalance(await penGuildPool.getAddress());
+      
+      await collection1.connect(user1).mintFromCollection(
+        collectionId,
+        "https://example.com/nft/1.png",
+        { value: mintPrice }
+      );
+      
+      const poolBalanceAfter = await ethers.provider.getBalance(await penGuildPool.getAddress());
+      expect(poolBalanceAfter - poolBalanceBefore).to.equal(platformFee);
     });
 
-    describe("Retrieving NFTs", function () {
-      it("Should return all listed NFTs", async function () {
-        const { marketplace } = await loadFixture(deployNFTMarketplaceFixture);
-        const tokenURI = "ipfs://test-uri";
-        const price = hre.ethers.parseEther("0.1");
-        const listPrice = await marketplace.getListPrice();
+    it("Should assign random XP to minted NFT", async function() {
+      const { marketplace, collection1, user1, collectionId } = await loadFixture(deployFixture);
+      
+      await collection1.connect(user1).mintFromCollection(
+        collectionId,
+        "https://example.com/nft/2.png",
+        { value: ethers.parseEther("0.1") }
+      );
 
-        await marketplace.createToken(tokenURI, price, { value: listPrice });
-        const nfts = await marketplace.getAllNFTs();
-        
-        expect(nfts.length).to.equal(1);
-        expect(nfts[0].price).to.equal(price);
-      });
-
-      it("Should return correct NFTs for owner", async function () {
-        const { marketplace, owner } = await loadFixture(deployNFTMarketplaceFixture);
-        const tokenURI = "ipfs://test-uri";
-        const price = hre.ethers.parseEther("0.1");
-        const listPrice = await marketplace.getListPrice();
-
-        await marketplace.createToken(tokenURI, price, { value: listPrice });
-        const myNfts = await marketplace.getMyNFTs();
-        
-        expect(myNfts.length).to.equal(1);
-        expect(myNfts[0].seller).to.equal(owner.address);
-      });
+      const tokenId = await marketplace.getTokenId();
+      const nftDetails = await marketplace.nftDetails(tokenId);
+      expect(nftDetails.xpPoints).to.be.gt(0);
+      expect(nftDetails.xpPoints).to.be.lte(100);
     });
 
-    describe("Sales", function () {
-      it("Should execute sale correctly", async function () {
-        const { marketplace, owner, otherAccount } = await loadFixture(deployNFTMarketplaceFixture);
-        const tokenURI = "ipfs://test-uri";
-        const price = hre.ethers.parseEther("0.1");
-        const listPrice = await marketplace.getListPrice();
+    it("Should mint NFT with image URL", async function() {
+      const { marketplace, collection1, user1, collectionId } = await loadFixture(deployFixture);
+      const imageUrl = "https://example.com/nft/1.png";
+      
+      await collection1.connect(user1).mintFromCollection(
+        collectionId, 
+        imageUrl,
+        { value: ethers.parseEther("0.1") }
+      );
 
-        await marketplace.createToken(tokenURI, price, { value: listPrice });
-        const tokenId = 1;
+      const tokenId = await marketplace.getTokenId();
+      const nftDetails = await marketplace.nftDetails(tokenId);
+      expect(nftDetails.imageUrl).to.equal(imageUrl);
+    });
+  });
 
-        await expect(
-          marketplace.connect(otherAccount).executeSale(tokenId, { value: price })
-        ).to.changeEtherBalance(otherAccount, -price);
+  describe("NFT Trading", function() {
+    it("Should allow users to list and buy NFTs", async function() {
+      const { marketplace, collection1, user1, user2, collectionId } = await loadFixture(deployFixture);
+      
+      // Mint NFT and wait for transaction to complete
+      await collection1.connect(user1).mintFromCollection(
+        collectionId,
+        "https://example.com/nft/3.png",
+        { value: ethers.parseEther("0.1") }
+      );
 
-        expect(await marketplace.ownerOf(tokenId)).to.equal(otherAccount.address);
-      });
+      const tokenId = await marketplace.getTokenId();
 
-      it("Should fail if incorrect price is paid", async function () {
-        const { marketplace, otherAccount } = await loadFixture(deployNFTMarketplaceFixture);
-        const tokenURI = "ipfs://test-uri";
-        const price = hre.ethers.parseEther("0.1");
-        const listPrice = await marketplace.getListPrice();
+      // List NFT
+      const listPrice = ethers.parseEther("0.2");
+      await marketplace.connect(user1).listNFTForSale(tokenId, listPrice);
 
-        await marketplace.createToken(tokenURI, price, { value: listPrice });
-        const tokenId = 1;
-        const incorrectPrice = hre.ethers.parseEther("0.05");
+      // Buy NFT
+      await marketplace.connect(user2).buyNFT(tokenId, { value: listPrice });
+      
+      expect(await marketplace.ownerOf(tokenId)).to.equal(user2.address);
+    });
+  });
 
-        await expect(
-          marketplace.connect(otherAccount).executeSale(tokenId, { value: incorrectPrice })
-        ).to.be.revertedWith("Please submit the asking price in order to complete the purchase");
-      });
+  describe("XP System", function() {
+    it("Should update XP correctly when NFT changes ownership", async function() {
+      const { marketplace, collection1, xpSystem, user1, user2, collectionId } = await loadFixture(deployFixture);
+      
+      // Mint NFT
+      await collection1.connect(user1).mintFromCollection(
+        collectionId,
+        "https://example.com/nft/4.png",
+        { value: ethers.parseEther("0.1") }
+      );
+
+      const tokenId = await marketplace.getTokenId();
+      const nftDetails = await marketplace.nftDetails(tokenId);
+      const nftXP = nftDetails.xpPoints;
+      
+      // Check XP after mint
+      const xpAfterMint = await xpSystem.userXP(user1.address);
+      expect(xpAfterMint).to.equal(nftXP);
+      expect(await xpSystem.hasNFTXP(user1.address, tokenId)).to.be.true;
+
+      // List and sell NFT
+      await marketplace.connect(user1).listNFTForSale(tokenId, ethers.parseEther("0.2"));
+      await marketplace.connect(user2).buyNFT(tokenId, { value: ethers.parseEther("0.2") });
+
+      // Check XP after sell
+      expect(await xpSystem.hasNFTXP(user1.address, tokenId)).to.be.false;
+      expect(await xpSystem.hasNFTXP(user2.address, tokenId)).to.be.true;
+      
+      const seller1XP = await xpSystem.userXP(user1.address);
+      expect(seller1XP).to.equal(0);
+      
+      const buyer2XP = await xpSystem.userXP(user2.address);
+      expect(buyer2XP).to.equal(nftXP);
+    });
+  });
+
+  describe("Platform Management", function() {
+    it("Should allow owner to withdraw funds from PenGuild pool", async function() {
+      const { penGuildPool, collection1, user1, owner, collectionId } = await loadFixture(deployFixture);
+      
+      // Generate some fees through minting
+      await collection1.connect(user1).mintFromCollection(
+        collectionId,
+        "https://example.com/nft/5.png",
+        { value: ethers.parseEther("0.1") }
+      );
+
+      const initialBalance = await ethers.provider.getBalance(owner.address);
+      await penGuildPool.connect(owner).withdrawFunds(ethers.parseEther("0.01"));
+      
+      const finalBalance = await ethers.provider.getBalance(owner.address);
+      expect(finalBalance).to.be.gt(initialBalance);
     });
   });
 });
