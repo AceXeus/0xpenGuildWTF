@@ -60,7 +60,7 @@ export default function RootLayout({
           <AOSInit />
           <TopLoader />
           <Header />
-          <main className='flex flex-col gap-2 py-14'>{children}</main>
+          <main className='flex flex-col gap-2 pt-[120px]'>{children}</main>
         </Providers>
       </body>
       <GoogleAnalytics gaId='G-QNXHRV4MHW' />

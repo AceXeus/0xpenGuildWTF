@@ -1,0 +1,9 @@
+[?25l[2K[1G[36m?[39m [1mConfirm deploy to network moonbaseAlpha (1287)?[22m [90m›[39m [90m(y/N)[39m[2K[1G[2K[1G[32m✔[39m [1mConfirm deploy to network moonbaseAlpha (1287)?[22m [90m…[39m yes
+[?25hHardhat Ignition starting for [ NFTMarketplaceModule ]...[2K[1G[ NFTMarketplaceModule ] Nothing new to deploy based on previous execution stored in ./ignition/deployments/chain-1287
+
+Deployed Addresses
+
+NFTMarketplaceModule#PenGuildPool - 0xaFD97969fD3Be09F4227f0609f5bfb74f1526767
+NFTMarketplaceModule#XPSystem - 0xB6E7470eBA815903B0D07B41008C122082a2FB5D
+NFTMarketplaceModule#NFTMarketplace - 0x490cbd4F4EE5a26bdC459014d35a8e16E5093715
+NFTMarketplaceModule#CreatorCollection - 0x62a2b60A8cbDBa5aE22a37D7B513dfc70378C35c

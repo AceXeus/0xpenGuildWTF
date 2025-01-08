@@ -1,5 +1,6 @@
 {
-  "NFTMarketplaceModule#PenGuildPool": "0xd5a131A8578812154ea3926F5f8593658cDE61C9",
-  "NFTMarketplaceModule#XPSystem": "0x4648d95C092030f08fb350c5BD5A6D4AE21F6922",
-  "NFTMarketplaceModule#NFTMarketplace": "0x87BD85CAe93F328985f0D1fD81E1CBc5969D01af"
+  "NFTMarketplaceModule#PenGuildPool": "0xaFD97969fD3Be09F4227f0609f5bfb74f1526767",
+  "NFTMarketplaceModule#XPSystem": "0xB6E7470eBA815903B0D07B41008C122082a2FB5D",
+  "NFTMarketplaceModule#NFTMarketplace": "0x490cbd4F4EE5a26bdC459014d35a8e16E5093715",
+  "NFTMarketplaceModule#CreatorCollection": "0x62a2b60A8cbDBa5aE22a37D7B513dfc70378C35c"
 }
