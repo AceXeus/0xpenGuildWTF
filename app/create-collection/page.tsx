@@ -16,6 +16,9 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "@/components/ui/tooltip"
+import { EventLog } from "ethers"
+import { waitForTransactionReceipt } from '@wagmi/core'
+import { config } from '@/providers/config'
 
 interface CollectionForm {
   name: string
@@ -108,6 +111,21 @@ export default function CreatorCollectionPage() {
         args: [creatorCollection.address as `0x${string}`]
       })
 
+      // const abiToggleCollection = {
+      //   name: 'toggleCollection',
+      //   type: 'function',
+      //   stateMutability: 'nonpayable',
+      //   inputs: [{ name: 'collectionAddress', type: 'address' }],
+      //   outputs: []
+      // }
+
+      // const txToggleCollection = await writeContract({
+      //   address: nftMarketplace.address as `0x${string}`,
+      //   abi: [abiToggleCollection],
+      //   functionName: 'toggleActive',
+      //   args: [creatorCollection.address as `0x${string}`]
+      // })
+
       toast({
         title: 'Success!',
         description: `NFT Collection has been created ${tx}`,
@@ -120,7 +138,25 @@ export default function CreatorCollectionPage() {
         variant: 'default'
       })
 
+      // toast({
+      //   title: 'Success!',
+      //   description: `NFT Collection has been toggled! ${txToggleCollection}`,
+      //   variant: 'default'
+      // })
+
+      const receipt = await waitForTransactionReceipt(config, {
+        hash: hash as `0x${string}`,
+      });
+      console.log("receipt", receipt)
+      if (!receipt) throw new Error("Transaction failed");
+      const event = receipt.logs.find(
+        (log: any) => log.fragment.name === 'CollectionRegistered'
+      );
+      if (!event) throw new Error("CollectionRegistered event not found");
+      const collectionId = (event as any).topics[1];
+      console.log("collectionId", collectionId)
     } catch (err) {
+      console.log("err", err)
       toast({
         title: 'Transaction failed',
         description: error?.message || 'An error occurred. Please try again.',

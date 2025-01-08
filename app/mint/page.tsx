@@ -3,11 +3,42 @@
 import React from 'react'
 import { Toaster } from '@/components/ui/toaster'
 import NFTMintingGrid from '@/containers/mint/nft-minting-grid'
+import { useContract } from '@/hooks/useContract'
+import { writeContract } from 'viem/actions'
+import { useAccount, useWriteContract } from 'wagmi'
+import { toast } from '@/hooks/use-toast'
 
 export default function MintNFTPage() {
-  const handleMintComplete = (selectedIndex: number) => {
+  const nftMarketplace = useContract('NFTMarketplace')
+  const creatorCollection = useContract('CreatorCollection')
+  const penGuildPool = useContract('PenGuildPool')
+  const { address: wagmiAddress } = useAccount()
+  const { data: hash, error, isPending, isSuccess, writeContract } = useWriteContract()
+
+  const handleMintComplete = async (selectedIndex: number) => {
     console.log(`NFT at index ${selectedIndex} has been minted`)
-    // Thêm logic xử lý sau khi mint thành công
+
+    const abiMintFromCollection = {
+      name: 'mintFromCollection',
+      type: 'function',
+      stateMutability: 'payable',
+      inputs: [{ name: 'collectionId', type: 'uint256' }, { name: 'tokenURI', type: 'string' }],
+      outputs: []
+    }
+
+    const tx = await writeContract({
+      address: creatorCollection?.address as `0x${string}`,
+      abi: [abiMintFromCollection],
+      functionName: 'mintFromCollection',
+      args: [BigInt(7), 'https://example.com/nft/1.png'],
+      value: BigInt(100 * selectedIndex)
+    })
+
+    toast({
+      title: 'Success!',
+      description: `NFT has been minted! ${tx}`,
+      variant: 'default'
+    })
   }
 
   return (
