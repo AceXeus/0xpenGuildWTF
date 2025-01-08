@@ -68,17 +68,57 @@ export default function CreatorCollectionPage() {
         return
       }
 
-      await writeContract({
+      const abiItem = {
+        name: 'createCollection',
+        type: 'function',
+        stateMutability: 'nonpayable',
+        inputs: [
+          { name: 'name', type: 'string' },
+          { name: 'description', type: 'string' },
+          { name: 'mintPrice', type: 'uint256' },
+          { name: 'maxSupply', type: 'uint256' }
+        ],
+        outputs: []
+      }
+
+      const tx = await writeContract({
         address: creatorCollection.address as `0x${string}`,
-        abi: creatorCollection.abi,
-        functionName: "createCollection",
+        abi: [abiItem],
+        functionName: 'createCollection',
         args: [
           formData.name,
           formData.description, 
           parseEther(formData.mintPrice),
-          BigInt(formData.maxSupply),
-        ],
-    });
+          BigInt(formData.maxSupply)
+        ]
+      })
+
+      const abiRegisterCollection = {
+        name: 'registerCollection',
+        type: 'function',
+        stateMutability: 'nonpayable',
+        inputs: [{ name: 'collectionAddress', type: 'address' }],
+        outputs: []
+      }
+      
+      const txRegisterCollection = await writeContract({
+        address: nftMarketplace.address as `0x${string}`,
+        abi: [abiRegisterCollection],
+        functionName: 'registerCollection',
+        args: [creatorCollection.address as `0x${string}`]
+      })
+
+      toast({
+        title: 'Success!',
+        description: `NFT Collection has been created ${tx}`,
+        variant: 'default'
+      })
+
+      toast({
+        title: 'Success!',
+        description: `NFT Collection has been registered! ${txRegisterCollection}`,
+        variant: 'default'
+      })
 
     } catch (err) {
       toast({
