@@ -3,7 +3,7 @@
 import * as React from 'react'
 import { RainbowKitProvider, getDefaultWallets, getDefaultConfig, darkTheme } from '@rainbow-me/rainbowkit'
 import { trustWallet, ledgerWallet } from '@rainbow-me/rainbowkit/wallets'
-import { mantaTestnet, manta, moonbaseAlpha, moonbeam } from 'wagmi/chains'
+import { moonbaseAlpha, moonbeam } from 'wagmi/chains'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { WagmiProvider, createConfig, http } from 'wagmi'
 import { defineChain } from 'viem'
@@ -35,18 +35,6 @@ export const westendAssetHub = defineChain({
   }
 })
 
-export const localConfig = createConfig({
-  chains: [westendAssetHub, manta, moonbaseAlpha, moonbeam],
-  transports: {
-    [westendAssetHub.id]: http(),
-    [mantaTestnet.id]: http(),
-    [manta.id]: http(),
-    [moonbaseAlpha.id]: http(),
-    [moonbeam.id]: http()
-  },
-  ssr: true
-})
-
 const config = getDefaultConfig({
   appName: '0xpenGuildWTF',
   projectId: '455a9939d641d79b258424737e7f9205',
@@ -57,13 +45,11 @@ const config = getDefaultConfig({
       wallets: [trustWallet, ledgerWallet]
     }
   ],
-  chains: [westendAssetHub, moonbeam, moonbaseAlpha, mantaTestnet, manta],
+  chains: [westendAssetHub, moonbeam, moonbaseAlpha],
   transports: {
     [westendAssetHub.id]: http(),
-    [mantaTestnet.id]: http(),
     [moonbeam.id]: http(),
-    [moonbaseAlpha.id]: http(),
-    [manta.id]: http()
+    [moonbaseAlpha.id]: http()
   },
   ssr: true
 })

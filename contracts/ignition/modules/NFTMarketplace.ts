@@ -16,10 +16,20 @@ const NFTMarketplaceModule = buildModule("NFTMarketplaceModule", (m) => {
     xpSystem
   ]);
 
+  // Deploy CreatorCollection 
+  const creatorCollection = m.contract("CreatorCollection", [
+    "Default Collection", // name
+    "Default Description", // description  
+    "100000000000000000", // mintPrice (0.1 ETH)
+    100, // maxSupply
+    nftMarketplace
+  ]);
+
   return { 
     penGuildPool,
     xpSystem,
-    nftMarketplace
+    nftMarketplace,
+    creatorCollection
   };
 });
 

@@ -4,22 +4,33 @@ import ConnectWalletBtn from '@/components/connect-wallet-btn'
 import StartHighlight from '@/components/start-highlight'
 import { ThemeToggle } from '@/components/theme-toggle'
 import { Separator } from '@/components/ui/separator'
-import { IconArrowRight, IconBrandDiscordFilled, IconBrandTelegram, IconBrandX, IconMenu2 } from '@tabler/icons-react'
+import { IconArrowRight, IconBrandDiscordFilled, IconBrandTelegram, IconBrandX, IconMenu2, IconChevronDown } from '@tabler/icons-react'
 import Link from 'next/link'
 import { useState } from 'react'
 
-const MENU_ITEMS = [
-  { label: 'Culture', href: '/culture' },
-  { label: 'Ranking', href: '/ranking' },
-  { label: 'Roadmap', href: '/roadmap' }
-]
+const MENU_ITEMS = {
+  main: [
+    { label: 'Home', href: '/' },
+  ],
+  about_us: [
+    { label: 'Culture', href: '/culture' },
+    { label: 'Roadmap', href: '/roadmap' },
+    { label: 'Ranking', href: '/ranking' }
+  ],
+  marketplace: [
+    { label: 'NFTS', href: '/nfts' },
+    { label: 'Create Collection', href: '/create-collection' },
+    { label: 'Mint', href: '/mint' }
+
+  ]
+}
 
 function Header() {
   const [open, setOpen] = useState(false)
   const toggleOpen = () => setOpen((prev) => !prev)
 
   return (
-    <div className={`z-50 border-b border-border bg-background uppercase`}>
+    <div className={`fixed top-0 left-0 right-0 z-[100] border-b border-border bg-background uppercase`}>
       <div className='relative flex items-center justify-between bg-primary px-20 py-[0.60rem] text-[0.5rem] font-normal leading-5 text-primary-foreground lg:text-xs'>
         <StartHighlight />
         <div className='absolute left-1/2 top-1/2 flex h-5 -translate-x-1/2 -translate-y-1/2 items-center gap-2 text-nowrap'>
@@ -41,23 +52,53 @@ function Header() {
             <Logo />
           </div>
           <div className='flex h-7 items-center gap-6 text-xs font-normal leading-5'>
-            {MENU_ITEMS.map((item, index) => (
+            {MENU_ITEMS.main.map((item, index) => (
               <div key={index}>
                 <Link
                   className='relative after:absolute after:-bottom-1 after:left-0 after:h-[2px] after:w-0 after:bg-current after:transition-all after:duration-300 hover:after:w-full'
-                  href={`${item.href}`}
+                  href={item.href}
                 >
                   {item.label}
                 </Link>
               </div>
             ))}
-            <div>
-              <Link
-                className='relative block after:absolute after:-bottom-1 after:left-0 after:h-[2px] after:w-0 after:bg-current after:transition-all after:duration-300 hover:after:w-full 2xl:hidden'
-                href='/about-us'
-              >
+            <div className="relative group">
+              <button className="flex items-center gap-1">
                 About Us
-              </Link>
+                <IconChevronDown className="h-4 w-4" />
+              </button>
+              <div className="absolute hidden group-hover:block min-w-[200px] top-full pt-2">
+                <div className="bg-background border border-border rounded-md shadow-lg p-2">
+                  {MENU_ITEMS.about_us.map((item, index) => (
+                    <Link
+                      key={index}
+                      href={item.href}
+                      className="block px-4 py-2 hover:bg-muted rounded-sm"
+                    >
+                      {item.label}
+                    </Link>
+                  ))}
+                </div>
+              </div>
+            </div>
+            <div className="relative group">
+              <button className="flex items-center gap-1">
+                Marketplace
+                <IconChevronDown className="h-4 w-4" />
+              </button>
+              <div className="absolute hidden group-hover:block min-w-[200px] top-full pt-2">
+                <div className="bg-background border border-border rounded-md shadow-lg p-2">
+                  {MENU_ITEMS.marketplace.map((item, index) => (
+                    <Link
+                      key={index}
+                      href={item.href}
+                      className="block px-4 py-2 hover:bg-muted rounded-sm"
+                    >
+                      {item.label}
+                    </Link>
+                  ))}
+                </div>
+              </div>
             </div>
           </div>
           <div className='flex h-7 items-center gap-4 text-xs font-normal leading-5'>
@@ -91,7 +132,7 @@ function Header() {
         {open && (
           <div className='flex flex-col gap-8 px-4 py-4'>
             <div className='flex flex-col items-center gap-4'>
-              {MENU_ITEMS.map((item, index) => (
+              {MENU_ITEMS.main.map((item, index) => (
                 <div key={index}>
                   <Link href={`/${item.href}`}>{item.label}</Link>
                 </div>
