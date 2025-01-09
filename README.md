@@ -65,6 +65,21 @@ To create an innovative and unique platform that:
 - High-level architecture integrating Ethereum and Polkadot for seamless interaction.  
 - Includes smart contract deployment, NFT minting logic, and a reward mechanism.  
 
+
+
+### Architecture Diagram
+
+- **Mint NFT On Platform** :
+
+<img alt="Mint NFT on Platform" src="https://github.com/user-attachments/assets/537c1ab3-8bac-4a0c-b827-8bb002fb1b0c" />
+
+- **Blockchain Interact Layer** :
+ + is updating...
+- **Trade NFT on Marketplace**
+ + is updating...
+- **Reward Distribution and Governance**
+ + is updating...
+
 ### Demo Instructions  
 
 1. **Clone the Repository**  
