@@ -5,7 +5,7 @@
 
 ## **Team Members**  
 
-- **SaitamaCoder** - Lead, Blockchain developer  
+- **SaitamaCoder** - Lead, Blockchain developer, Fullstack developer, Researcher 
 - **Key(Andrew)** - Researcher ,Blockchain developer 
 - **Lou1s** - Fullstack developer
 - **PiNguyen** - UI/UX  
@@ -64,6 +64,60 @@ To create an innovative and unique platform that:
 ### Architecture  
 - High-level architecture integrating Ethereum and Polkadot for seamless interaction.  
 - Includes smart contract deployment, NFT minting logic, and a reward mechanism.  
+
+
+
+### Architecture Diagram
+
+- **Mint NFT On Platform** :
+
+<img alt="Mint NFT on Platform" src="./public/architechture/Mint.png" />
+
+- **Blockchain Interact Layer** :
+
+<img alt="Blockchain Interact Layer" src="./public/architechture/BlockchainLayer.png" />
+
+- **Trade NFT on Marketplace**
+
+<img alt="Trade NFT on Marketplace" src="./public/architechture/Trade.png" />
+
+- **Reward Distribution and Governance**
+
+<img alt="Reward Distribution and Governance" src="./public/architechture/PenguildPool.png" />
+
+### ROADMAP
+
+Our development roadmap is divided into 4 major phases:
+
+#### Phase 1: Foundation (Q1 2025)
+- Complete NFT Marketplace smart contracts development
+- Implement XP and reward systems
+- Launch beta version on Moonbase Alpha testnet and Westend testnet
+- Establish randomized NFT minting mechanism
+
+#### Phase 2: Cross-Chain Integration (Q2 2025)
+- Integrate bridge between Ethereum and Polkadot networks
+- Deploy token and reward distribution system
+- Launch NFT collection creation and management features
+- Optimize marketplace user experience
+
+#### Phase 3: Community & Growth (Q3-Q4 2025)
+- Launch time-limited NFT minting events
+- Expand gamification system and community missions
+- Integrate additional blockchains (Solana, Avalanche)
+- Develop analytics tools for creators and collectors
+
+#### Phase 4: Innovation & Expansion (2026)
+- Implement decentralized platform governance
+- Expand ecosystem with DeFi applications
+- Develop GameFi and metaverse marketplace integration
+- Optimize platform performance and scalability
+
+### Video demo
+
+[![Watch the video](https://img.youtube.com/vi/aqCzEQ9IWX0/maxresdefault.jpg)](https://www.youtube.com/watch?v=aqCzEQ9IWX0)
+
+➡️ [Watch the video demo on YouTube](https://www.youtube.com/watch?v=aqCzEQ9IWX0)
 
 ### Demo Instructions  
 

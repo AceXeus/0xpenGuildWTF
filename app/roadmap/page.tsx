@@ -24,7 +24,7 @@ export default function RoadmapPage() {
       tasks: [
         "Complete NFT Marketplace smart contracts development",
         "Implement XP and reward systems",
-        "Launch beta version on Moonbase Alpha testnet",
+        "Launch beta version on Moonbase Alpha testnet and Westend testnet",
         "Establish randomized NFT minting mechanism"
       ]
     },
