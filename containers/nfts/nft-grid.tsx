@@ -6,6 +6,7 @@ import { Button } from '@/components/ui/button'
 import { Grid2X2, LayoutList } from 'lucide-react'
 import { NFTCard } from '@/components/nft-card'
 import { NFTListItem } from '@/components/nft-list-item'
+import Link from 'next/link'
 
 const DEMO_NFTS = [
   {
@@ -57,7 +58,9 @@ export function NFTGrid() {
     <div className='flex-1 p-4 md:p-6'>
       <div className='mb-6 flex flex-col items-start justify-between gap-4 md:flex-row md:items-center'>
         <h1 className='text-2xl font-bold md:text-3xl'>Cryptographics</h1>
-        <Button variant='outline'>Create new item</Button>
+        <Link href='/create-new-item'>
+          <Button variant='outline'>Create new item</Button>
+        </Link>
       </div>
 
       <div className='mb-6 flex flex-col items-start justify-between gap-4 md:flex-row md:items-center'>
