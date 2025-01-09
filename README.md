@@ -71,14 +71,53 @@ To create an innovative and unique platform that:
 
 - **Mint NFT On Platform** :
 
-<img alt="Mint NFT on Platform" src="https://github.com/user-attachments/assets/537c1ab3-8bac-4a0c-b827-8bb002fb1b0c" />
+<img alt="Mint NFT on Platform" src="./public/architechture/Mint.png" />
 
 - **Blockchain Interact Layer** :
- + is updating...
+
+<img alt="Blockchain Interact Layer" src="./public/architechture/BlockchainLayer.png" />
+
 - **Trade NFT on Marketplace**
- + is updating...
+
+<img alt="Trade NFT on Marketplace" src="./public/architechture/Trade.png" />
+
 - **Reward Distribution and Governance**
- + is updating...
+
+<img alt="Reward Distribution and Governance" src="./public/architechture/PenguildPool.png" />
+
+### ROADMAP
+
+Our development roadmap is divided into 4 major phases:
+
+#### Phase 1: Foundation (Q1 2025)
+- Complete NFT Marketplace smart contracts development
+- Implement XP and reward systems
+- Launch beta version on Moonbase Alpha testnet and Westend testnet
+- Establish randomized NFT minting mechanism
+
+#### Phase 2: Cross-Chain Integration (Q2 2025)
+- Integrate bridge between Ethereum and Polkadot networks
+- Deploy token and reward distribution system
+- Launch NFT collection creation and management features
+- Optimize marketplace user experience
+
+#### Phase 3: Community & Growth (Q3-Q4 2025)
+- Launch time-limited NFT minting events
+- Expand gamification system and community missions
+- Integrate additional blockchains (Solana, Avalanche)
+- Develop analytics tools for creators and collectors
+
+#### Phase 4: Innovation & Expansion (2026)
+- Implement decentralized platform governance
+- Expand ecosystem with DeFi applications
+- Develop GameFi and metaverse marketplace integration
+- Optimize platform performance and scalability
+
+<img alt="Roadmap" src="./public/architechture/Roadmap.png" />
+
+### Video demo
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/aqCzEQ9IWX0" frameborder="0" allowfullscreen></iframe>
 
 ### Demo Instructions  
 
