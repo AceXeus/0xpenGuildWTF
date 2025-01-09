@@ -7,6 +7,11 @@ import { motion } from 'framer-motion'
 import { Loader2 } from 'lucide-react'
 import { toast } from '@/hooks/use-toast'
 import ScratchToMint from '@/components/scratch-to-mint'
+import { parseEther } from 'viem'
+import { writeContract } from 'viem/actions'
+import { useContract } from '@/hooks/useContract'
+import { useWriteContract } from 'wagmi'
+import { saveNFTToStorage } from '@/lib/local-storage'
 
 interface NFTData {
   image: string
@@ -29,11 +34,33 @@ const NFTMintingGrid: React.FC<NFTMintingGridProps> = ({ nftCount, onMintComplet
   )
   const [isLoading, setIsLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
+  const { data: hash, isPending, isSuccess, writeContract } = useWriteContract()
+  const creatorCollection = useContract('CreatorCollection')
 
   const handlePayment = async () => {
     setIsLoading(true)
     setError(null)
     try {
+      const abiItem = {
+        name: 'createCollection',
+        type: 'function',
+        stateMutability: 'nonpayable',
+        inputs: [
+          { name: 'name', type: 'string' },
+          { name: 'description', type: 'string' },
+          { name: 'mintPrice', type: 'uint256' },
+          { name: 'maxSupply', type: 'uint256' }
+        ],
+        outputs: []
+      }
+
+      await writeContract({
+        address: creatorCollection?.address as `0x${string}`,
+        abi: [abiItem],
+        functionName: 'createCollection',
+        args: ['test', 'test', parseEther('1'), BigInt(100)]
+      })
+
       const nftPromises = Array(nftCount)
         .fill(0)
         .map(() => fetch('/api/v1/random-nft').then((res) => res.json()))
@@ -65,6 +92,11 @@ const NFTMintingGrid: React.FC<NFTMintingGridProps> = ({ nftCount, onMintComplet
   const handleComplete = () => {
     if (selectedNFT !== null && !isMinted) {
       setIsMinted(true)
+      const selectedNFTData = nftData[selectedNFT]
+      saveNFTToStorage({
+        ...selectedNFTData,
+        mintedAt: new Date().toISOString()
+      })
       onMintComplete(selectedNFT)
       toast({
         title: 'NFT Minted Successfully',
