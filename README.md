@@ -113,8 +113,6 @@ Our development roadmap is divided into 4 major phases:
 - Develop GameFi and metaverse marketplace integration
 - Optimize platform performance and scalability
 
-<img alt="Roadmap" src="./public/architechture/Roadmap.png" />
-
 ### Video demo
 
 [![Watch the video](https://img.youtube.com/vi/aqCzEQ9IWX0/maxresdefault.jpg)](https://www.youtube.com/watch?v=aqCzEQ9IWX0)
