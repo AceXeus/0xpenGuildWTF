@@ -117,7 +117,9 @@ Our development roadmap is divided into 4 major phases:
 
 ### Video demo
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/aqCzEQ9IWX0" frameborder="0" allowfullscreen></iframe>
+[![Watch the video](https://img.youtube.com/vi/aqCzEQ9IWX0/maxresdefault.jpg)](https://www.youtube.com/watch?v=aqCzEQ9IWX0)
+
+➡️ [Watch the video demo on YouTube](https://www.youtube.com/watch?v=aqCzEQ9IWX0)
 
 ### Demo Instructions  
 
