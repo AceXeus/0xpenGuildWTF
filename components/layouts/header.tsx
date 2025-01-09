@@ -163,7 +163,7 @@ export const Logo = () => {
 const Socials = () => {
   return (
     <div className='flex items-center justify-center gap-10 lg:gap-4'>
-      <Link href='https://discord.gg/CJcXfAPdpU' target='_blank' aria-label='Join our Discord community'>
+      <Link href='https://discord.gg/xYrqGnUgqp' target='_blank' aria-label='Join our Discord community'>
         <IconBrandDiscordFilled className='size-6 lg:size-4' />
       </Link>
       <Link
