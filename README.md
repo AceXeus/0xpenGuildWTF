@@ -5,7 +5,7 @@
 
 ## **Team Members**  
 
-- **SaitamaCoder** - Lead, Blockchain developer  
+- **SaitamaCoder** - Lead, Blockchain developer, Fullstack developer, Researcher 
 - **Key(Andrew)** - Researcher ,Blockchain developer 
 - **Lou1s** - Fullstack developer
 - **PiNguyen** - UI/UX  
