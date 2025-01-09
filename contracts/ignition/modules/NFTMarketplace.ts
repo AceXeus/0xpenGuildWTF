@@ -20,7 +20,7 @@ const NFTMarketplaceModule = buildModule("NFTMarketplaceModule", (m) => {
   const creatorCollection = m.contract("CreatorCollection", [
     "Default Collection", // name
     "Default Description", // description  
-    "100000000000000000", // mintPrice (0.1 ETH)
+    "100000000000000000", // mintPrice (0.1 WND)
     100, // maxSupply
     nftMarketplace
   ]);

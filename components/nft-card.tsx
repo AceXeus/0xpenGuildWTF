@@ -28,7 +28,7 @@ export function NFTCard({ title, creator, image, price, type }: NFTCardProps) {
             {type === 'fixed' ? 'Fixed price' : 'Open bidding'}
           </span>
         </div>
-        <Badge variant='secondary'>{price} ETH</Badge>
+        <Badge variant='secondary'>{price} WND</Badge>
       </CardFooter>
     </Card>
   )

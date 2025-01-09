@@ -242,7 +242,7 @@ export default function CreatorCollectionPage() {
 
               <div className="space-y-2">
                 <div className="flex items-center justify-between">
-                  <label htmlFor='mintPrice' className="text-sm font-medium">Mint Price (ETH)</label>
+                  <label htmlFor='mintPrice' className="text-sm font-medium">Mint Price (WND)</label>
                   <TooltipProvider>
                     <Tooltip>
                       <TooltipTrigger>

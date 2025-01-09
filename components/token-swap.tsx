@@ -12,7 +12,7 @@ import { useConnectModal } from '@rainbow-me/rainbowkit'
 export default function MoveTokenSwap() {
   const { isConnected } = useAccount()
   const { openConnectModal } = useConnectModal()
-  const [fromToken, setFromToken] = useState('ETH')
+  const [fromToken, setFromToken] = useState('WND')
   const [toToken, setToToken] = useState('USDT')
   const [fromAmount, setFromAmount] = useState('')
   const [toAmount, setToAmount] = useState('')
@@ -54,7 +54,7 @@ export default function MoveTokenSwap() {
                       <SelectValue placeholder='Token' />
                     </SelectTrigger>
                     <SelectContent>
-                      <SelectItem value='ETH'>ETH</SelectItem>
+                      <SelectItem value='WND'>WND</SelectItem>
                       <SelectItem value='USDT'>USDT</SelectItem>
                     </SelectContent>
                   </Select>
@@ -71,7 +71,7 @@ export default function MoveTokenSwap() {
                 </div>
               </div>
               <div className='flex items-center justify-between text-sm text-muted-foreground'>
-                <span>Balance: 1.2345 ETH</span>
+                <span>Balance: 1.2345 WND</span>
                 <Button variant='ghost' size='sm' className='h-auto px-2 py-0'>
                   Max
                 </Button>
@@ -104,7 +104,7 @@ export default function MoveTokenSwap() {
                       <SelectValue placeholder='Token' />
                     </SelectTrigger>
                     <SelectContent>
-                      <SelectItem value='ETH'>ETH</SelectItem>
+                      <SelectItem value='WND'>WND</SelectItem>
                       <SelectItem value='USDT'>USDT</SelectItem>
                     </SelectContent>
                   </Select>
@@ -131,7 +131,7 @@ export default function MoveTokenSwap() {
             <div className='flex items-center justify-between text-sm'>
               <span className='text-muted-foreground'>Rate</span>
               <div className='flex items-center'>
-                <span>1 ETH = 3,694.7358 USDT</span>
+                <span>1 WND = 3,694.7358 USDT</span>
                 <Button variant='ghost' size='icon' className='ml-1 h-6 w-6'>
                   <RefreshCw className='h-4 w-4' />
                 </Button>

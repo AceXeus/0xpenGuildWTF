@@ -58,7 +58,7 @@ const LeaderList = ({ items, itemLabel }: { items: LeaderboardItem[]; itemLabel:
           </div>
           <div className='col-span-2 text-right text-base text-highlight'>+{item.change}%</div>
           <div className='col-span-2 text-right text-base tabular-nums'>{item.itemsSold}</div>
-          <div className='col-span-2 text-right text-base tabular-nums'>{item.volume} ETH</div>
+          <div className='col-span-2 text-right text-base tabular-nums'>{item.volume} WND</div>
         </div>
       ))}
     </CardContent>

@@ -152,7 +152,7 @@ export default function ListNFTPage() {
             <div>
               <form onSubmit={handleListNFT} className="space-y-4">
                 <div>
-                  <label className="text-sm font-medium">Sale Price (ETH)</label>
+                  <label className="text-sm font-medium">Sale Price (WND)</label>
                   <Input
                     type="number"
                     step="0.001"

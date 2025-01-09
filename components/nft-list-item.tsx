@@ -20,7 +20,7 @@ export function NFTListItem({ title, creator, image, price, type }: NFTListItemP
         <p className='truncate text-sm text-highlight'>{creator}</p>
       </div>
       <div className='flex flex-col items-end gap-2'>
-        <Badge variant='secondary'>{price} ETH</Badge>
+        <Badge variant='secondary'>{price} WND</Badge>
         <span className='text-xs text-muted-foreground md:text-sm'>
           {type === 'fixed' ? 'Fixed price' : 'Open bidding'}
         </span>

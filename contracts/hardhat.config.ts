@@ -9,8 +9,15 @@ const config: HardhatUserConfig = {
   networks: {
     moonbaseAlpha: {
       chainId: 1287,
-      url: `${process.env.RPC_NETWORK}`,
+      url: `${process.env.MOONBASE_RPC_NETWORK}`,
       accounts: [process.env.PRIVATE_KEY || ""],
+    },
+    westend: {
+      chainId: 420420421,
+      url: `${process.env.WESTEND_RPC_NETWORK}`,
+      accounts: [process.env.PRIVATE_KEY || ""],
+      gasPrice: "auto",
+      gas: "auto"
     },
   }
 };
